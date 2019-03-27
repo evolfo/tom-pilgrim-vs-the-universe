@@ -143,8 +143,9 @@ const Level5 = new Phaser.Class({
   // ====================
       if (gameOver)
       {
-          this.scene.start('Level5');
+          this.scene.start('Level1');
           playerHealth = 3;
+          document.querySelector('.health').innerText = `Health: ${playerHealth}`;
           gameOver = false;
       }
 
