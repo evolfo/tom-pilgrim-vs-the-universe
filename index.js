@@ -7,6 +7,7 @@ let fireball;
 let isHit = false;
 let fireballs;
 let playerHealth = 3;
+let bossHealth;
 let speed;
 let angle = "left";
 let gameOver = false;
@@ -23,7 +24,9 @@ var config = {
       }
     },
     pixelArt: true,
-    scene: [ Level1, Level2 ]
+    scene: [  Level5 ]
 };
 
 let game = new Phaser.Game(config);
+
+//Level1, Level2, Level3, Level4,
