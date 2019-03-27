@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>PLATFORMUR</title>
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.min.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css">
+</head>
+<body>
+  <div class="scoreboard">
+    <ul>
+      <li class="health">Health: 3</li>
+      <li class="score">Score: 0</li>
+    </ul>
+  </div>
+<script defer type="text/javascript" src="bullet.js"></script>
+<script type="text/javascript" src="helperFunctions.js"></script>
+<script type="text/javascript" src="levels/level.js"></script>
+<script type="text/javascript" src="levels/level1.js"></script>
+<script type="text/javascript" src="levels/level2.js"></script>
+<script type="text/javascript" src="levels/level3.js"></script>
+<script type="text/javascript" src="levels/level4.js"></script>
+<script type="text/javascript" src="levels/level5.js"></script>
+<script type="text/javascript" src="oo/user.js"></script>
+<script type="text/javascript" src="oo/userAdapter.js"></script>
+<script type="text/javascript" src="oo/gameAdapter.js"></script>
+<script type="text/javascript" src="oo/game.js"></script>
+<script type="text/javascript" src="oo/app.js"></script>
+
+<script defer type="text/javascript" src="index.js"></script>
+<script type="text/javascript">
+
+
+</script>
+
+<div id="user-input">
+  <div>
+    <form action="">
+      <input autocomplete="off" name="username" type="text" placeholder="Enter a Username">
+      <button id="submit-button" type='submit'>Submit</button>
+    </form>
+  </div>
+</div>
+
+<div id="main-background">
+  <div>
+    <h1>Space Platformer</h1>
+    <button id="play-button">Play Game</button>
+    <ul id="user-scores">
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
