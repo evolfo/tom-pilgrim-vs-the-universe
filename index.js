@@ -1,4 +1,4 @@
-let player;
+let player, enemies, boss1;
 let platforms;
 let cursors;
 let score = 0;
@@ -24,9 +24,7 @@ var config = {
       }
     },
     pixelArt: true,
-    scene: [  Level5 ]
+    scene: [ Level1, Level2, Level3, Level4, Level5 ]
 };
 
 let game = new Phaser.Game(config);
-
-//Level1, Level2, Level3, Level4,
