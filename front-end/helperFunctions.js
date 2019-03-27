@@ -69,15 +69,11 @@ function gunMechanics() {
       this.input.keyboard.on("keydown_SPACE", function (event) {
         const self = this.scene;
         let bullet = this.scene.bullets.get();
-        if(bullet && cursors.right.isDown) {
-          bullet.fire(player, "right");
-          self.physics.add.collider(bullet, enemies, killEnemy, null, this);
-          self.physics.add.collider(bullet, boss1, hitBoss, null, this);
-        } else if(bullet && cursors.left.isDown) {
+          if(bullet && cursors.left.isDown) {
           bullet.fire(player, "left");
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
-        } else {
+        } else if(bullet) {
           bullet.fire(player, "right");
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
