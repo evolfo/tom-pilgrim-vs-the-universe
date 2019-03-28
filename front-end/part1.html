@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>PLATFORMUR</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.16.2/dist/phaser.min.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body  >
   <div class="scoreboard">
     <ul>
       <li class="health">Health: 3</li>
@@ -43,11 +46,15 @@
 
 </script>
 
-<div id="user-input">
+
+
+<div id="user-input" >
   <div>
     <form action="">
-      <input autocomplete="off" name="username" type="text" placeholder="Enter a Username">
-      <button id="submit-button" type='submit'>Submit</button>
+      <div class="form-group">
+        <input autocomplete="off" class="form-control" name="username" required type="text" placeholder="Enter a Username">
+      </div>
+      <button id="submit-button"  type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
 </div>

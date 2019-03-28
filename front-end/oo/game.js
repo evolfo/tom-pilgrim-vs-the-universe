@@ -12,14 +12,20 @@ class Game {
     return this.all.find(game => game.id === id);
   }
 
-  static generateScoreHTML(sortedGames, userScoresUL) {
+  static generateScoreHTML(userScoresUL) {
     userScoresUL.innerHTML = "";
 
-    for(let i = 0; i < 11; i++) {
-      let newGame = sortedGames[i];
-      userScoresUL.innerHTML += `
-        <li id="${newGame.id}">${newGame.user.username} - ${newGame.score}</li>
-      `
+    const sortedGames = Game.all.sort((a, b) => {
+      return b.score - a.score
+    });
+    let displayedUsers = [];
+    // debugger
+    for(let i = 0; i < 10; i++) {
+      if( i < sortedGames.length && !displayedUsers.includes(sortedGames[i].user_id)){
+
+        userScoresUL.innerHTML += `<li id="${sortedGames[i].id}">${sortedGames[i].user.username} - ${sortedGames[i].score}</li>`
+        displayedUsers.push(sortedGames[i].user_id);
+      }
     }
   }
 

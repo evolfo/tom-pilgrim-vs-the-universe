@@ -52,23 +52,12 @@ function gameConfig() {
   let game = new Phaser.Game(config);
 }
 
-// Sorting All Games
-function compare(a,b) {
-  if (a.score < b.score)
-    return -1;
-  if (a.score > b.score)
-    return 1;
-  return 0;
-}
-
 document.addEventListener('DOMContentLoaded', () => {
 
   app.gameAdapter.getAllGames()
    .then(allGames => {
-
-    sortedGames = allGames.sort(compare).reverse();
-    Game.generateScoreHTML(sortedGames, userScoresUL);
-
+     allGames.forEach(game => new Game(game))
+       Game.generateScoreHTML(userScoresUL);
   })
 
   submitButton.addEventListener('click', event => {
@@ -112,8 +101,8 @@ function updatingGame() {
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
-      sortedGames = allGames.sort(compare).reverse();
-      Game.generateScoreHTML(sortedGames, userScoresUL);
+      Game.generateScoreHTML(userScoresUL);
+      console.log(userScoresUL);
     })
 }
 

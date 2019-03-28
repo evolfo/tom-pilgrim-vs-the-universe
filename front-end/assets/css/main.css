@@ -1,10 +1,11 @@
-html, body {
-
+html {
+  margin-left: auto;
+margin-right: auto;
+width: 8em
 }
 
 body {
   font-family: "helvetica";
-  color: white;
 }
 
 body > #main-background, body > #end-game, body > #victory {
