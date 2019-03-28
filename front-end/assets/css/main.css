@@ -1,3 +1,7 @@
+html, body {
+
+}
+
 body {
   font-family: "helvetica";
 }
@@ -5,6 +9,7 @@ body {
 body > #main-background, body > #end-game {
   display: none;
 }
+
 
 #main-background, #user-input, #end-game {
   background: url('/front-end/assets/main-background.gif');

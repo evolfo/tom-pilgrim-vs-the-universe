@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     app.gameAdapter.getAllGames()
      .then(allGames => {
+      sortedGames = allGames.sort_
+
       allGames.forEach(game => {
         newGame = new Game(game);
           userScoresUL.innerHTML += newGame.generateScoreHTML();
