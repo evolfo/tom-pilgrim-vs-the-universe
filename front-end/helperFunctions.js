@@ -67,7 +67,7 @@ function hitBoss (bullet, boss)
 function killBoss (boss) {
 
   if (boss.texture.key === "finalBoss") {
-    victory();
+    victory = true;
   }
 
   boss.body.velocity.x = 0;

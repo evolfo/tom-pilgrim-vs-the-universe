@@ -1,7 +1,4 @@
 html {
-  margin-left: auto;
-margin-right: auto;
-width: 8em
 }
 
 body {
@@ -62,4 +59,9 @@ li {
   color: black;
   position: absolute;
   left: 884px;
+}
+
+canvas {
+  position: absolute;
+    left: 25%;
 }

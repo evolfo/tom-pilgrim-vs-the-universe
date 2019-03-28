@@ -114,10 +114,10 @@ class Level extends Phaser.Scene {
           this.physics.add.collider(boss2, Walls);
         }
 
-        if(this.nextLevel === "Level16"){
-            this.finalBossInfo();
-            this.physics.add.collider(finalBoss, Walls);
-          }
+      if(this.nextLevel === "Level16"){
+          this.finalBossInfo();
+          this.physics.add.collider(finalBoss, Walls);
+        }
 
 // ===================
 // COLLISIONS
@@ -163,6 +163,13 @@ class Level extends Phaser.Scene {
         // Removing Game Window
         document.querySelector('canvas').remove();
 
+    }
+
+    if (victory === true) {
+      this.sys.game.destroy(true);
+      gameVictory();
+      // Removing Game Window
+      document.querySelector('canvas').remove();
     }
 // ===============
 // PLAYER MOVEMENT

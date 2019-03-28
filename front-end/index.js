@@ -11,6 +11,7 @@ let bossHealth;
 let speed;
 let angle = "left";
 let gameOver = false;
+let victory = false;
 
 let spaceBar;
 let left;
@@ -45,10 +46,13 @@ let config = {
     scene: [ Level15 ]
 };
 
-// New Game Config
+// New Game Config, Resets gameOver, victory states, and sets score to 0
 
 function gameConfig() {
   gameOver = false;
+  victory = false;
+  score = 0;
+  scoreDisplay.innerText = `Score: ${score}`;
   let game = new Phaser.Game(config);
 }
 
@@ -86,23 +90,23 @@ function gameOverScreen() {
   updatingGame();
 }
 
-function victory() {
+function gameVictory() {
   playerHealth = 3;
   gameOver = false;
   victoryDIV.style.display = "flex";
+  score += 100;
+  scoreDisplay.innerText = `Score: ${score}`;
 
-  updatingGame();
+  updatingGame(victory);
 }
 
-function updatingGame() {
+function updatingGame(victory) {
   game = Game.all[Game.all.length -1];
-  victory = false;
-
+  debugger
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
       Game.generateScoreHTML(userScoresUL);
-      console.log(userScoresUL);
     })
 }
 
