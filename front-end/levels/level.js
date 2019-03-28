@@ -17,6 +17,7 @@ class Level extends Phaser.Scene {
       this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('boss1', 'assets/boss1.png', { frameWidth: 55, frameHeight: 80 });
       this.load.spritesheet('boss2', 'assets/boss2.png', { frameWidth: 55, frameHeight: 80 });
+      this.load.spritesheet('finalBoss', 'assets/final-boss.png', { frameWidth: 60, frameHeight: 70 });
       bossHealth = 15;
       gameOver = false;
       document.querySelector('.health').innerText = `Health: ${playerHealth}`;
@@ -113,6 +114,11 @@ class Level extends Phaser.Scene {
           this.physics.add.collider(boss2, Walls);
         }
 
+        if(this.nextLevel === "Level16"){
+            this.finalBossInfo();
+            this.physics.add.collider(finalBoss, Walls);
+          }
+
 // ===================
 // COLLISIONS
 // ===================
@@ -128,6 +134,7 @@ class Level extends Phaser.Scene {
       this.physics.add.collider(this.bullets, Walls);
       this.physics.add.collider(player, boss1, boundHitEnemy, null, this);
       this.physics.add.collider(player, boss2, boundHitEnemy, null, this);
+      this.physics.add.collider(player, finalBoss, boundHitEnemy, null, this);
 
       const boundGunMechanics = gunMechanics.bind(this);
       boundGunMechanics(this.bullets);
@@ -218,6 +225,10 @@ class Level extends Phaser.Scene {
 
       if(this.nextLevel === "Level11") {
         this.physics.moveToObject(boss2, player, 300);
+      }
+
+      if(this.nextLevel === "Level16") {
+        this.physics.moveToObject(finalBoss, player, 300);
       }
     }
 };

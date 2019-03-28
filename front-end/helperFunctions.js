@@ -66,6 +66,10 @@ function hitBoss (bullet, boss)
 
 function killBoss (boss) {
 
+  if (boss.texture.key === "finalBoss") {
+    victory();
+  }
+
   boss.body.velocity.x = 0;
   boss.setTint(0xff0000);
   setTimeout(function () {
@@ -89,11 +93,13 @@ function gunMechanics(bullets) {
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
           self.physics.add.collider(bullet, boss2, hitBoss, null, this);
+          self.physics.add.collider(bullet, finalBoss, hitBoss, null, this);
         } else if(bullet) {
           bullet.fire(player, "right");
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
           self.physics.add.collider(bullet, boss2, hitBoss, null, this);
+          self.physics.add.collider(bullet, finalBoss, hitBoss, null, this);
         }
         else if(bullet.body.velocity.x === 0) {
           bullet.disableBody(true, true);

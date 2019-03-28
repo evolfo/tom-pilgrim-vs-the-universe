@@ -7,12 +7,12 @@ body {
   color: white;
 }
 
-body > #main-background, body > #end-game {
+body > #main-background, body > #end-game, body > #victory {
   display: none;
 }
 
 
-#main-background, #user-input, #end-game {
+#main-background, #user-input, #end-game, #victory {
   background: url('/front-end/assets/main-background.gif');
   height: 600px;
   width: 800px;
@@ -22,11 +22,11 @@ body > #main-background, body > #end-game {
   justify-content: center;
 }
 
-#main-background > div, #user-input > div, #end-game > div {
+#main-background > div, #user-input > div, #end-game > div, #victory > div {
   text-align: center;
 }
 
-#main-background h1, #end-game h1 {
+#main-background h1, #end-game h1, #victory h1 {
   color: white;
   font-family: 'helvetica';
 }

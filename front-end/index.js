@@ -1,5 +1,5 @@
 
-let player, enemies, boss1, boss2;
+let player, enemies, boss1, boss2, finalBoss;
 let platforms;
 let cursors;
 let score = 0;
@@ -25,6 +25,8 @@ const userScoresUL = document.querySelector('#user-scores');
 const userInputDIV = document.querySelector('#user-input');
 const endGameDIV = document.querySelector('#end-game');
 const playButton2 = endGameDIV.querySelector('.play-button');
+const victoryDIV = document.querySelector('#victory');
+const playButton3 = victoryDIV.querySelector('.play-button');
 
 const app = new App;
 
@@ -40,7 +42,7 @@ let config = {
       }
     },
     pixelArt: true,
-    scene: [ Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10 ]
+    scene: [ Level15 ]
 };
 
 // New Game Config
@@ -86,13 +88,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function gameOverScreen() {
 
-
   health.style.display = "none";
   scoreDisplay.style.display = "none";
   endGameDIV.style.display = "flex";
   playerHealth = 3;
   gameOver = false;
 
+  updatingGame();
+}
+
+function victory() {
+  playerHealth = 3;
+  gameOver = false;
+  victoryDIV.style.display = "flex";
+
+  updatingGame();
+}
+
+function updatingGame() {
   game = Game.all[Game.all.length -1];
   victory = false;
 
@@ -104,6 +117,20 @@ function gameOverScreen() {
     })
 }
 
+function creatingGame() {
+  let id = User.all[0].id
+
+// CREATING GAME INSTANCE JAVASCRIPT OO
+  app.gameAdapter.createGame(id)
+    .then(gameObj => {
+      new Game(gameObj);
+    })
+}
+
+// =========
+// LISTENERS
+// =========
+
 playButton.addEventListener('click', event => {
 
   mainBackground.style.display = "none";
@@ -112,13 +139,7 @@ playButton.addEventListener('click', event => {
   scoreDisplay.style.display = "block";
   endGameDIV.style.display = "none";
 
-  let id = User.all[0].id
-
-// CREATING GAME INSTANCE JAVASCRIPT OO
-  app.gameAdapter.createGame(id)
-    .then(gameObj => {
-      new Game(gameObj);
-    })
+  creatingGame();
 
   gameConfig();
 })
@@ -127,5 +148,18 @@ playButton2.addEventListener('click', event => {
   health.style.display = "block";
   scoreDisplay.style.display = "block";
   endGameDIV.style.display = "none";
+
+  creatingGame();
+
+  gameConfig();
+})
+
+playButton3.addEventListener('click', event => {
+  health.style.display = "block";
+  scoreDisplay.style.display = "block";
+  victoryDIV.style.display = "none";
+
+  creatingGame();
+
   gameConfig();
 })

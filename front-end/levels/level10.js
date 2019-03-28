@@ -16,5 +16,5 @@ class Level10 extends Level {
       boss2 = this.physics.add.sprite(700, 450, 'boss2');
       boss2.setGravityY(100);
       boss2.setCollideWorldBounds(true);
-  }
+    }
 }
