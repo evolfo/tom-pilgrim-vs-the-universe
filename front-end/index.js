@@ -26,6 +26,8 @@ const userInputDIV = document.querySelector('#user-input');
 const endGameDIV = document.querySelector('#end-game');
 const playButton2 = endGameDIV.querySelector('.play-button');
 
+const app = new App;
+
 let config = {
     type: Phaser.AUTO,
     width: 800,
@@ -48,7 +50,6 @@ function gameConfig() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new App;
 
   submitButton.addEventListener('click', event => {
     event.preventDefault();
@@ -74,15 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function gameOverScreen() {
+
+
   health.style.display = "none";
   scoreDisplay.style.display = "none";
   endGameDIV.style.display = "flex";
   playerHealth = 3;
   gameOver = false;
+
+  gameId = Game.all[Game.all.length -1].id;
+  victory = false;
+
+  app.gameAdapter.updateGame(gameId, score, victory);
 }
 
 playButton.addEventListener('click', event => {
-  const app = new App;
 
   mainBackground.style.display = "none";
   userInputDIV.style.display = "none";
@@ -90,8 +97,7 @@ playButton.addEventListener('click', event => {
   scoreDisplay.style.display = "block";
   endGameDIV.style.display = "none";
 
-  let id = User.current.id;
-  debugger
+  let id = User.all[0].id
   app.gameAdapter.createGame(id);
 
   gameConfig();

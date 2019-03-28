@@ -20,4 +20,16 @@ class GameAdapter {
     })
     .then(resp => resp.json())
   }
+
+  updateGame(id, score, victory) {
+    return fetch(this.endPoint + `/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({api_v1_game: {score: score}})
+    })
+    .then(resp => resp.json())
+  }
 }

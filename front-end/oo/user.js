@@ -9,11 +9,6 @@ class User {
     return this.all.find(user => user.id === id);
   }
 
-  static current() {
-
-    return User.all.last;
-  }
-
 }
 
 User.all = [];
