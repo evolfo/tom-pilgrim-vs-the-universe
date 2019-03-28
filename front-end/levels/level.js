@@ -16,7 +16,8 @@ class Level extends Phaser.Scene {
       this.load.spritesheet('evilDude', 'assets/evil-dude.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('boss1', 'assets/boss1.png', { frameWidth: 55, frameHeight: 80 });
-      bossHealth = 10;
+      this.load.spritesheet('boss2', 'assets/boss2.png', { frameWidth: 55, frameHeight: 80 });
+      bossHealth = 15;
       gameOver = false;
       // playerHealth = 3;
       document.querySelector('.health').innerText = `Health: ${playerHealth}`;
@@ -26,17 +27,13 @@ class Level extends Phaser.Scene {
     {
       const map = this.make.tilemap({ key: `${this.map}` });
       const background = map.addTilesetImage('tiles1', 'background');
-      const misc = map.addTilesetImage('misc', 'misc');
+      // const misc = map.addTilesetImage('misc', 'misc');
       const walls = map.addTilesetImage('walls', 'walls');
       const Background = map.createStaticLayer(0, background, 0, 0);
-      const Misc = map.createStaticLayer(0, misc, 0, 0);
+      // const Misc = map.createStaticLayer(0, misc, 0, 0);
       const Walls = map.createStaticLayer("Walls", walls, 0, 0);
-      // this.add.image(0, 0, 'sky').setOrigin(0, 0);
 
-      spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-
-      platforms = this.physics.add.staticGroup();
-
+// ADDING PLAYER
       player = this.physics.add.sprite( this.playerX,  this.playerY , 'dude');
 
       player.setBounce(0);
@@ -46,12 +43,14 @@ class Level extends Phaser.Scene {
       speed = Phaser.Math.GetSpeed(300, 1);
       var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
+// ADDING ENEMIES
       enemies = this.physics.add.group({
         key: `evilDude`,
-        repeat: 3,
+        repeat: 1,
         setXY: { x: 400, y: 480, stepX: 100 }
       });
 
+// BINDING PLAYER HITTING ENEMY FUNCTION TO THIS
       let boundHitEnemy = hitEnemy.bind(this);
 
       enemies.children.iterate( (child) => {
@@ -64,8 +63,9 @@ class Level extends Phaser.Scene {
          this.physics.moveToObject(child, player, 100)
        });
        this.physics.add.collider(enemies, Walls);
+
 // ===================
-// ANIMATING PLAYER AND ENEMY
+// ANIMATING PLAYER AND BASIC ENEMY
 // ===================
       this.anims.create({
           key: 'left',
@@ -107,10 +107,12 @@ class Level extends Phaser.Scene {
           repeat: -1
       });
 
-      cursors = this.input.keyboard.createCursorKeys();
-
       if(this.nextLevel === "Level6"){
           this.bossInfo();
+        }
+
+      if(this.nextLevel === "Level11"){
+          this.boss2Info();
         }
 
 // ===================
@@ -118,8 +120,17 @@ class Level extends Phaser.Scene {
 // ===================
       this.physics.add.collider(player, Walls);
       Walls.setCollisionByProperty({ collides: true });
+
+      this.bullets = this.physics.add.group({
+        classType: Bullet,
+        maxSize: 10,
+        runChildUpdate: true
+      });
+
+      this.physics.add.collider(this.bullets, Walls);
+
       const boundGunMechanics = gunMechanics.bind(this);
-      boundGunMechanics();
+      boundGunMechanics(this.bullets);
 
     }
 
@@ -140,40 +151,56 @@ class Level extends Phaser.Scene {
 
     if (gameOver)
     {
-        this.scene.start('Level1');
-        playerHealth = 3;
-        gameOver = false;
-    }
+        this.sys.game.destroy(true);
+        gameOverScreen();
+        // Removing Game Window
+        document.querySelector('canvas').remove();
 
-      if (cursors.left.isDown)
+    }
+// ===============
+// PLAYER MOVEMENT
+// ===============
+    spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+    left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+    right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+
+      if (left.isDown)
       {
         player.setVelocityX(-360);
         player.anims.play('left', true);
         angle = "left";
+        console.log(player.body.facing);
       }
-      else if (cursors.right.isDown)
+      else if (right.isDown)
       {
         player.setVelocityX(360);
         player.anims.play('right', true);
         angle = "right";
+        console.log(player.body.facing);
       }
       else
       {
         player.setVelocityX(0);
         player.anims.play('turn');
       }
+
       this.input.keyboard.on("keydown_UP", function (event)
       {
         if (player.body.velocity.y === 0) {
           player.setVelocityY(-490);
         }
       });
-      /////////////
+// ==============
+// ENEMY MOVEMENT
+// ==============
 
+// ENEMIES MOVES TOWARDS PLAYER
       enemies.children.entries.forEach((child) =>  {
         this.physics.moveToObject(child, player, 100)
      });
 
+//ENEMIES ANIMATE
       enemies.children.entries.forEach((child) => {
         if(player.x > child.x)  {
           child.anims.play(`enemy-right`, true);
@@ -185,8 +212,14 @@ class Level extends Phaser.Scene {
         }
       });
 
+// BOSS MOVING TOWARDS PLAYER
+
       if(this.nextLevel === "Level6") {
         this.physics.moveToObject(boss1, player, 100);
+      }
+
+      if(this.nextLevel === "Level11") {
+        this.physics.moveToObject(boss2, player, 100);
       }
     }
 };

@@ -2,11 +2,11 @@ body {
   font-family: "helvetica";
 }
 
-body > #main-background {
+body > #main-background, body > #end-game {
   display: none;
 }
 
-#main-background, #user-input {
+#main-background, #user-input, #end-game {
   background: url('/front-end/assets/main-background.gif');
   height: 600px;
   width: 800px;
@@ -16,11 +16,11 @@ body > #main-background {
   justify-content: center;
 }
 
-#main-background > div, #user-input > div {
+#main-background > div, #user-input > div, #end-game > div {
   text-align: center;
 }
 
-#main-background h1 {
+#main-background h1, #end-game h1 {
   color: white;
   font-family: 'helvetica';
 }

@@ -8,7 +8,7 @@ class Api::V1::GamesController < ApplicationController
   def create
     @game = Game.create(game_params)
     if @game.valid?
-      render json: @game, status: accepted
+      render json: @game, status: :created
     else
       render json: { errors: @game.errors.full_messages }, status: :unprocessible_entity
     end

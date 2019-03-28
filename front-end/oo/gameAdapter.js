@@ -9,14 +9,14 @@ class GameAdapter {
     .then(res => res.json())
   }
 
-  createGame(game) {
+  createGame(userId) {
     return fetch(this.endPoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify({api_v1_user: {game})
+      body: JSON.stringify({api_v1_game: {user_id: userId, score: 0, victory: false}})
     })
     .then(resp => resp.json())
   }

@@ -10,8 +10,11 @@ function hitEnemy (){
   setTimeout(function() { isHit = false; player.setTint(0x00FFFFFF); }, 2000);
 }
 
-function loseHealth() {
+// =============
+// LOSING HEALTH
+// =============
 
+function loseHealth() {
   if (isHit === false){
     // this.cameras.main.shake(100);
     playerHealth--;
@@ -22,6 +25,10 @@ function loseHealth() {
     gameOver = true;
   }
 }
+
+// ================
+// INCREASING Score
+// ================
 
 function increaseScore() {
   score += 10;
@@ -39,6 +46,10 @@ function killEnemy (bullet, enemy)
       }, 200);
       increaseScore();
   }
+
+// ===================
+// Boss Damage functions
+// ===================
 
 function hitBoss (bullet, boss)
   {
@@ -59,24 +70,29 @@ function killBoss (boss) {
   increaseScore();
 }
 
-function gunMechanics() {
+// ==============
+// FIRING BULLETS
+// ==============
+
+function gunMechanics(bullets) {
   this.space = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-      this.bullets = this.physics.add.group({
-        classType: Bullet,
-        maxSize: 10,
-        runChildUpdate: true
-      });
+
       this.input.keyboard.on("keydown_SPACE", function (event) {
         const self = this.scene;
         let bullet = this.scene.bullets.get();
-          if(bullet && cursors.left.isDown) {
+          if((bullet && player.body.facing === 13) || (player.body.facing === 11 && left.isDown)) {
           bullet.fire(player, "left");
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
+          self.physics.add.collider(bullet, boss2, hitBoss, null, this);
         } else if(bullet) {
           bullet.fire(player, "right");
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
+          self.physics.add.collider(bullet, boss2, hitBoss, null, this);
+        }
+        else if(bullet.body.velocity.x === 0) {
+          bullet.disableBody(true, true);
         }
       });
         this.input.on("pointerdown", (event) => {
