@@ -99,7 +99,6 @@ function gameOverScreen() {
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
-      debugger
       sortedGames = allGames.sort(compare).reverse();
       Game.generateScoreHTML(sortedGames, userScoresUL);
     })

@@ -6,6 +6,7 @@ class Level5 extends Level {
     this.map = 'map5';
     this.playerX = 60;
     this.playerY = 540;
+    this.enemyCount = 4;
 
     Phaser.Scene.call(this, { key: 'Level5' });
 
@@ -13,8 +14,6 @@ class Level5 extends Level {
   }
 
   bossInfo(){
-    let  boundHitEnemy = hitEnemy.bind(this);
-    this.physics.add.collider(player, boss1, boundHitEnemy, null, this);
     boss1 = this.physics.add.sprite(700, 450, 'boss1');
     boss1.setGravityY(100);
     boss1.setCollideWorldBounds(true);

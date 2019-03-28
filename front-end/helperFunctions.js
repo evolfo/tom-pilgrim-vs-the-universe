@@ -1,3 +1,7 @@
+// ========================================================
+// WHEN THE PLAYER COLLIDES WITH AN ENEMY OR BOSS THIS RUNS
+// ========================================================
+
 function hitEnemy (){
   if (isHit === false){
     // this.cameras.main.shake(100);
