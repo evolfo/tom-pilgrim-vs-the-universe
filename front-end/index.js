@@ -43,13 +43,31 @@ let config = {
     scene: [ Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10 ]
 };
 
+// New Game Config
 
 function gameConfig() {
   gameOver = false;
   let game = new Phaser.Game(config);
 }
 
+// Sorting All Games
+function compare(a,b) {
+  if (a.score < b.score)
+    return -1;
+  if (a.score > b.score)
+    return 1;
+  return 0;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+
+  app.gameAdapter.getAllGames()
+   .then(allGames => {
+
+    sortedGames = allGames.sort(compare).reverse();
+    Game.generateScoreHTML(sortedGames, userScoresUL);
+
+  })
 
   submitButton.addEventListener('click', event => {
     event.preventDefault();
@@ -61,16 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
     app.userAdapter.createUser(username)
       .then(userObj => {
         new User(userObj);
-      })
-
-    app.gameAdapter.getAllGames()
-     .then(allGames => {
-      sortedGames = allGames.sort_
-
-      allGames.forEach(game => {
-        newGame = new Game(game);
-          userScoresUL.innerHTML += newGame.generateScoreHTML();
-        })
       })
     });
 
@@ -85,10 +93,16 @@ function gameOverScreen() {
   playerHealth = 3;
   gameOver = false;
 
-  gameId = Game.all[Game.all.length -1].id;
+  game = Game.all[Game.all.length -1];
   victory = false;
 
-  app.gameAdapter.updateGame(gameId, score, victory);
+  app.gameAdapter.updateGame(game.id, score, victory)
+    .then(gameObj => {
+      game.score = gameObj.score;
+      debugger
+      sortedGames = allGames.sort(compare).reverse();
+      Game.generateScoreHTML(sortedGames, userScoresUL);
+    })
 }
 
 playButton.addEventListener('click', event => {
@@ -100,7 +114,12 @@ playButton.addEventListener('click', event => {
   endGameDIV.style.display = "none";
 
   let id = User.all[0].id
-  app.gameAdapter.createGame(id);
+
+// CREATING GAME INSTANCE JAVASCRIPT OO
+  app.gameAdapter.createGame(id)
+    .then(gameObj => {
+      new Game(gameObj);
+    })
 
   gameConfig();
 })
