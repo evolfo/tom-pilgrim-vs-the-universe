@@ -4,7 +4,6 @@ html, body {
 
 body {
   font-family: "helvetica";
-  color: white;
 }
 
 body > #main-background, body > #end-game {
@@ -48,18 +47,13 @@ button {
 }
 
 ul {
+  display: flex;
   font-size: 1.5rem;
+  position: absolute;
+  color: white;
   right: 201px;
-  list-style-type: none;
 }
 
 li {
   padding-right: 20px;
-}
-
-.scores {
-  color: black;
-  width: 100%;
-  position: absolute;
-  left: 884px;
 }
