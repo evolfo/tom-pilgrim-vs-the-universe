@@ -1,18 +1,5 @@
 
-html {
 
-
-}
-
-#scores-div {
-
-
-}
-
-
-body {
-
-}
 
 body > #main-background, body > #end-game, body > #victory {
   display: none;
@@ -69,9 +56,4 @@ li {
   color: black;
   /* position: absolute; */
   left: 884px;
-}
-
-canvas {
-  position: absolute;
-    left: 25%;
 }
