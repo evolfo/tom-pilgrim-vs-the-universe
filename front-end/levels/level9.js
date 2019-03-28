@@ -6,6 +6,7 @@ class Level9 extends Level {
     this.map = 'map9';
     this.playerX = 20;
     this.playerY = 340;
+    this.enemyCount = 7;
 
     Phaser.Scene.call(this, { key: 'Level9' });
 
