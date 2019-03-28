@@ -9,13 +9,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="assets/css/main.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body  >
-  <div class="scoreboard">
-    <ul>
-      <li class="health">Health: 3</li>
-      <li class="score">Score: 0</li>
-    </ul>
-  </div>
+<body class="row" >
 <script defer type="text/javascript" src="bullet.js"></script>
 <script type="text/javascript" src="helperFunctions.js"></script>
 <script type="text/javascript" src="levels/level.js"></script>
@@ -34,45 +28,49 @@
 <script type="text/javascript" src="oo/gameAdapter.js"></script>
 <script type="text/javascript" src="oo/game.js"></script>
 <script type="text/javascript" src="oo/app.js"></script>
-
 <script defer type="text/javascript" src="index.js"></script>
-<script type="text/javascript">
 
 
-</script>
-
-
-
-<div id="user-input" >
-  <div>
-    <form action="">
-      <div class="form-group">
-        <input autocomplete="off" class="form-control" name="username" required type="text" placeholder="Enter a Username">
-      </div>
-      <button id="submit-button"  type="submit" class="btn btn-primary">Submit</button>
-    </form>
+  <div class="scoreboard" style="display:none">
+    <ul>
+      <li class="health">Health: 3</li>
+      <li class="score">Score: 0</li>
+    </ul>
   </div>
-</div>
+  <!-- <div class="col-md-6 offset-md-3">.col-md-6 .offset-md-3</div> -->
 
-<div id="main-background">
-  <div>
-    <h1>Space Platformer</h1>
-    <button class="play-button">Play Game</button>
+  <div id="scores-div" class=" offset-md-1">
+    <h3> Top Scores: </h3>
+    <ol id="user-scores">
+    </ol>
   </div>
-</div>
 
-<div id="end-game">
-  <div class="game-end">
-    <h1>GAME OVER</h1>
-    <button class="play-button">Play Again</button>
+  <div id="user-input" class="col-md-6 offset-md-1">
+    <div>
+      <form action="">
+        <div class="form-group">
+          <input autocomplete="off" class="form-control" name="username" required type="text" placeholder="Enter a Username">
+        </div>
+        <button id="submit-button"  type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<div class="scores">
-  <h3> Top Scores: </h3>
-  <ul id="user-scores">
-  </ul>
-</div>
+  <div id="main-background" class="col-md-6 offset-md-1" >
+    <div>
+      <h1>Space Platformer</h1>
+      <button class="play-button">Play Game</button>
+    </div>
+  </div>
+
+  <div id="end-game" class="col-md-6 offset-md-1">
+    <div class="game-end">
+      <h1>GAME OVER</h1>
+      <button class="play-button">Play Again</button>
+    </div>
+  </div>
+
+
 
 </body>
 </html>

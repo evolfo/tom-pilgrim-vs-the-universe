@@ -48,6 +48,7 @@ let config = {
 function gameConfig() {
   gameOver = false;
   let game = new Phaser.Game(config);
+  document.querySelector('canvas').className = "col-md-6 offset-md-1";
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -58,11 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
        Game.generateScoreHTML(userScoresUL);
   })
 
-  submitButton.addEventListener('click', event => {
+  document.querySelector('form').addEventListener('submit', event => {
     event.preventDefault();
+    userInputDIV.style.display = "none";
     mainBackground.style.display = "flex";
-
-    let username = event.target.parentElement.username.value;
+    let username = event.target.username.value;
 
 // Creating User
     app.userAdapter.createUser(username)
@@ -89,12 +90,11 @@ function gameOverScreen() {
     .then(gameObj => {
       game.score = gameObj.score;
       Game.generateScoreHTML(userScoresUL);
-      console.log(userScoresUL);
     })
 }
 
 playButton.addEventListener('click', event => {
-
+  debugger
   mainBackground.style.display = "none";
   userInputDIV.style.display = "none";
   health.style.display = "block";

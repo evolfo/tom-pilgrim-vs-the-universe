@@ -1,11 +1,17 @@
-html {
-  margin-left: auto;
-margin-right: auto;
-width: 8em
+html, body{
+/* width: 100%; */
+
+/* margin: auto; */
+
 }
 
+#scores-div {
+
+}
+
+
 body {
-  font-family: "helvetica";
+
 }
 
 body > #main-background, body > #end-game {
@@ -17,7 +23,7 @@ body > #main-background, body > #end-game {
   background: url('/front-end/assets/main-background.gif');
   height: 600px;
   width: 800px;
-  position: absolute;
+  /* position: absolute; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,19 +45,20 @@ button {
   max-width: 80%;
 }
 
-.health, .score {
+/* .health, .score {
   display: none;
-}
+} */
 
 .scoreboard {
   text-align: right;
   width: 100%;
 }
 
-ul {
+ol {
+
   font-size: 1.5rem;
   padding: 0px;
-  list-style-type: none;
+    list-style-type: decimal;
 }
 
 li {
@@ -60,6 +67,6 @@ li {
 
 .scores {
   color: black;
-  position: absolute;
+  /* position: absolute; */
   left: 884px;
 }
