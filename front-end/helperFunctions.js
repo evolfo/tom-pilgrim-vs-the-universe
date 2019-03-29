@@ -8,6 +8,7 @@ function hitEnemy (){
     loseHealth();
     isHit = true;
     player.setTint(0xff0000);
+    hearts.children.entries[0].body.gameObject.destroy(this.scene);
   }
 
   // Makes player invulnerable for 2 seconds after getting hit
@@ -30,6 +31,14 @@ function loseHealth() {
   }
 }
 
+function removeHeart(heart) {
+  if (!hitEnemyIsRunning) {
+    hitEnemyIsRunning = true;
+    heart.disableBody(true, true);
+    hitEnemyIsRunning = false;
+  }
+}
+
 // ================
 // INCREASING Score
 // ================
@@ -47,7 +56,7 @@ function killEnemy (bullet, enemy)
       enemy.setTint(0xff0000);
       setTimeout(function () {
         enemy.disableBody(true, true);
-      }, 200);
+      }, 500);
       increaseScore();
   }
 
