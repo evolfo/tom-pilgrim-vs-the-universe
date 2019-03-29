@@ -8,6 +8,7 @@ function hitEnemy (){
     loseHealth();
     isHit = true;
     player.setTint(0xff0000);
+    hearts.children.entries[0].body.gameObject.destroy(this.scene);
   }
 
   // Makes player invulnerable for 2 seconds after getting hit
@@ -27,6 +28,14 @@ function loseHealth() {
 
   if (playerHealth === 0) {
     gameOver = true;
+  }
+}
+
+function removeHeart(heart) {
+  if (!hitEnemyIsRunning) {
+    hitEnemyIsRunning = true;
+    heart.disableBody(true, true);
+    hitEnemyIsRunning = false;
   }
 }
 

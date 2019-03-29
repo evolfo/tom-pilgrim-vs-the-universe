@@ -4,15 +4,7 @@ html{
 }
 
 body{
-/* width: 100%; */
 
-/* margin: auto; */
-  /* background-image: url("../bg-alien.gif") */
-  /* background: url(../bg-alien.gif) no-repeat center center fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover; */
 }
 
 .background {
@@ -27,7 +19,7 @@ background-size: cover; */
   width: 100%;
   height: 100%;
   z-index: -10;
-  opacity: .2;
+  opacity: .1;
 }
 
 body > #main-background, body > #end-game, body > #victory {
@@ -69,21 +61,29 @@ button {
   border-radius: 7px;
 }
 
-/* .health, .score {
+.health {
   display: none;
-} */
+}
+
+.score {
+  margin-top: 50px;
+  margin-right: -8px;
+}
+
+/* Left Side Scoreboard */
 
 .scoreboard {
-  /* text-align: right; */
-  /* width: 100%; */
-    /* background-color: white; */
+  right: 20%;
+  top: 3%;
+  color: white;
+  position: absolute;
+  font-size: 25px;
+  z-index: 200;
 }
 
 ol {
-
   font-size: 1.5rem;
-  /* padding: 0px; */
-    list-style-type: decimal;
+  list-style-type: decimal;
 }
 
 li {
@@ -96,4 +96,8 @@ li {
 
   /* position: absolute; */
   left: 884px;
+}
+
+.username {
+  color: #86c0ff;
 }

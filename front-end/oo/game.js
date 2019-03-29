@@ -42,6 +42,10 @@ class Game {
         userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}">${uniqueArray[i].user.username} - ${uniqueArray[i].score} </br>  Attempts: ${uniqueArray[i].gamesPlayed} </li>`
       }
     };
+
+    document.querySelector('.username').style.color = "#f7c25a";
+    document.querySelectorAll('.username')[1].style.color = "silver";
+    document.querySelectorAll('.username')[2].style.color = "#906717";
   }
 
 }

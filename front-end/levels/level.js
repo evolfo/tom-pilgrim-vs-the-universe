@@ -13,8 +13,14 @@ class Level extends Phaser.Scene {
       this.load.image('misc', "assets/json/zelda-tiles.png");
       this.load.image('walls', "assets/json/space-tiles2.png");
       this.load.image('bullet', 'assets/bomb.png');
+
       this.load.spritesheet('evilDude', 'assets/evil-fly.png', { frameWidth: 38, frameHeight: 47 });
       this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+      this.load.image('heart', 'assets/heart.png');
+      this.load.spritesheet('dude', 'assets/hero.png', { frameWidth: 36, frameHeight: 46 });
+
+
+
       this.load.spritesheet('boss1', 'assets/boss1.png', { frameWidth: 55, frameHeight: 80 });
       this.load.spritesheet('boss2', 'assets/boss2.png', { frameWidth: 55, frameHeight: 80 });
       this.load.spritesheet('finalBoss', 'assets/final-boss.png', { frameWidth: 60, frameHeight: 70 });
@@ -45,12 +51,11 @@ class Level extends Phaser.Scene {
       enemies = this.physics.add.group({
         key: `evilDude`,
         repeat: this.enemyCount
-            });
+        });
 
       var circle = new Phaser.Geom.Circle(400, 300, 200);
 
       Phaser.Actions.RandomCircle(enemies.getChildren(), circle);
-
 
 // BINDING PLAYER HITTING ENEMY FUNCTION TO THIS
       let boundHitEnemy = hitEnemy.bind(this);
@@ -65,6 +70,14 @@ class Level extends Phaser.Scene {
          this.physics.moveToObject(child, player, 100)
        });
        this.physics.add.collider(enemies, Walls);
+
+ // ADDING HEARTS
+
+       hearts = this.physics.add.group({
+         key: 'heart',
+         repeat: playerHealth - 1,
+         setXY: {x: 650, y: 50, stepX: 50}
+       })
 
 // ===================
 // ANIMATING PLAYER AND BASIC ENEMY
@@ -109,6 +122,7 @@ class Level extends Phaser.Scene {
           repeat: -1
       });
 
+
       if(this.nextLevel === "Level6"){
           this.bossInfo();
         }
@@ -150,7 +164,7 @@ class Level extends Phaser.Scene {
 // ====================
 // Changing SCENES
 // ====================
-    if (player.x === 784) {
+    if (player.x === 782) {
       // debugger
       this.scene.start(this.nextLevel);
     }
