@@ -286,7 +286,6 @@ function gameVictory() {
 // LISTENERS
 
 playButton.addEventListener('click', event => {
-
   mainBackground.style.display = "none";
   userInputDIV.style.display = "none";
   health.style.display = "block";
