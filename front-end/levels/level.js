@@ -15,7 +15,7 @@ class Level extends Phaser.Scene {
       this.load.image('bullet', 'assets/bomb.png');
 
       this.load.spritesheet('evilDude', 'assets/evil-fly.png', { frameWidth: 38, frameHeight: 47 });
-      this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+      // this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
       this.load.image('heart', 'assets/heart.png');
       this.load.spritesheet('dude', 'assets/hero.png', { frameWidth: 36, frameHeight: 46 });
 
@@ -169,7 +169,7 @@ class Level extends Phaser.Scene {
       this.scene.start(this.nextLevel);
     }
 
-    if (player.y === 576) {
+    if (player.y === 577) {
        loseHealth();
        this.scene.start(`${this.scene.key}`);
      }
