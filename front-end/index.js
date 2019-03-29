@@ -76,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function gameOverScreen() {
 
-
   health.style.display = "none";
   scoreDisplay.style.display = "none";
   endGameDIV.style.display = "flex";
