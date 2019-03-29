@@ -261,7 +261,7 @@ function gameOverScreen() {
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
-      Game.generateScoreHTML(userScoresUL, user);
+      Game.generateScoreHTML(userScoresUL);
     })
 }
 
@@ -278,7 +278,7 @@ function gameVictory() {
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
-      Game.generateScoreHTML(userScoresUL, user);
+      Game.generateScoreHTML(userScoresUL);
     })
 }
 

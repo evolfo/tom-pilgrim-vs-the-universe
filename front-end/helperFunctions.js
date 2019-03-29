@@ -46,7 +46,9 @@ function killEnemy (bullet, enemy)
       enemy.anims.play('enemy-turn');
       enemy.setTint(0xff0000);
       setTimeout(function () {
-        enemy.disableBody(true, true);
+        if ( enemy != undefined){
+          enemy.disableBody(true, true);
+        }
       }, 200);
       increaseScore();
   }
