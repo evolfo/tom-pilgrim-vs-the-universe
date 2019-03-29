@@ -17,6 +17,7 @@ class Level extends Phaser.Scene {
       this.load.spritesheet('evilDude', 'assets/evil-dude.png', { frameWidth: 32, frameHeight: 48 });
       // this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
       this.load.spritesheet('dude', 'assets/hero.png', { frameWidth: 36, frameHeight: 46 });
+      this.load.spritesheet('evilDude', 'assets/evil-fly.png', { frameWidth: 38, frameHeight: 47 });
       this.load.spritesheet('boss1', 'assets/boss1.png', { frameWidth: 55, frameHeight: 80 });
       this.load.spritesheet('boss2', 'assets/boss2.png', { frameWidth: 55, frameHeight: 80 });
       this.load.spritesheet('finalBoss', 'assets/final-boss.png', { frameWidth: 60, frameHeight: 70 });
@@ -113,7 +114,7 @@ class Level extends Phaser.Scene {
 
       this.anims.create({
           key: 'enemy-right',
-          frames: this.anims.generateFrameNumbers('evilDude', { start: 5, end: 8 }),
+          frames: this.anims.generateFrameNumbers('evilDude', { start: 0, end: 3 }),
           frameRate: 10,
           repeat: -1
       });

@@ -37,7 +37,6 @@ class Game {
       }
     });
 
-    let createdUser = [];
     for(let i = 0; i < 8; i++) {
       if( i < uniqueArray.length ){
         userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}"><span class="username">${uniqueArray[i].user.username}</span> - ${uniqueArray[i].score} <br> Attempts: ${uniqueArray[i].gamesPlayed} </li>`
