@@ -28,8 +28,12 @@ body > #main-background, body > #end-game, body > #victory {
 
 button {
   padding: 20px;
-  border-radius: 3px;
   max-width: 80%;
+  border-radius: 7px;
+}
+
+.play-button {
+  border-radius: 7px;
 }
 
 /* .health, .score {

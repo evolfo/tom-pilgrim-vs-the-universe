@@ -20,8 +20,8 @@ class Game {
     });
     let displayedUsers = [];
     for(let i = 0; i < 10; i++) {
+      console.log(sortedGames[i].user_id);
       if( i < sortedGames.length && !displayedUsers.includes(sortedGames[i].user_id)){
-        debugger
         userScoresUL.innerHTML += `<li id="${sortedGames[i].id}">${sortedGames[i].user.username} - ${sortedGames[i].score}</li>`
         displayedUsers.push(sortedGames[i].user_id);
       }
