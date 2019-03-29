@@ -43,9 +43,13 @@ class Level extends Phaser.Scene {
 // ADDING ENEMIES
       enemies = this.physics.add.group({
         key: `evilDude`,
-        repeat: this.enemyCount,
-        setXY: { x: Phaser.Math.Between(350, 600), y: Phaser.Math.Between(200, 600), stepX: Phaser.Math.Between(150, 170), stepX: Phaser.Math.Between(50, 100) }
-      });
+        repeat: this.enemyCount
+            });
+
+      var circle = new Phaser.Geom.Circle(400, 300, 200);
+
+      Phaser.Actions.RandomCircle(enemies.getChildren(), circle);
+
 
 // BINDING PLAYER HITTING ENEMY FUNCTION TO THIS
       let boundHitEnemy = hitEnemy.bind(this);

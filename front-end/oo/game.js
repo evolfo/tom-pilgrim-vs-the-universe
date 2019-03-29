@@ -26,20 +26,23 @@ class Game {
     sortedGames.forEach((game) => {
       if(!allUserIds.includes(game.user_id)){
         allUserIds.push(game.user_id);
+        game.gamesPlayed = 1;
         uniqueArray.push(game);
+      } else {
+        uniqueArray.forEach(uniqueGame => {
+          if (uniqueGame.user_id === game.user_id) {
+            uniqueGame.gamesPlayed++;
+          }
+        })
       }
-    })
-
+    });
 
     let createdUser = [];
     for(let i = 0; i < 10; i++) {
       if( i < uniqueArray.length ){
-
-        userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}">${uniqueArray[i].user.username} - ${uniqueArray[i].score}</li>`
-
-
+        userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}">${uniqueArray[i].user.username} - ${uniqueArray[i].score} | Attempts:${uniqueArray[i].gamesPlayed} </li>`
       }
-    }
+    };
   }
 
 }
