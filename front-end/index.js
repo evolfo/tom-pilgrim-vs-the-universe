@@ -211,13 +211,15 @@ let config = {
       }
     },
     pixelArt: true,
-    scene: [ Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10 ]
+    scene: [ Level1, Level2, Level3, Level4, Level5, Level6, Level7, Level8, Level9, Level10, Level11, Level12, Level13, Level14, Level15 ]
 };
 
 // New Game Config
 
 function gameConfig() {
   gameOver = false;
+  victory = false;
+  score = 0;
   let game = new Phaser.Game(config);
   document.querySelector('canvas').className = "col-md-6 offset-md-1";
 }
@@ -247,7 +249,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function gameOverScreen() {
 
-
   health.style.display = "none";
   scoreDisplay.style.display = "none";
   endGameDIV.style.display = "flex";
@@ -260,7 +261,7 @@ function gameOverScreen() {
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
-      Game.generateScoreHTML(userScoresUL);
+      Game.generateScoreHTML(userScoresUL, user);
     })
 }
 
@@ -277,7 +278,7 @@ function gameVictory() {
   app.gameAdapter.updateGame(game.id, score, victory)
     .then(gameObj => {
       game.score = gameObj.score;
-      Game.generateScoreHTML(userScoresUL);
+      Game.generateScoreHTML(userScoresUL, user);
     })
 }
 
@@ -285,6 +286,7 @@ function gameVictory() {
 // LISTENERS
 
 playButton.addEventListener('click', event => {
+
   mainBackground.style.display = "none";
   userInputDIV.style.display = "none";
   health.style.display = "block";

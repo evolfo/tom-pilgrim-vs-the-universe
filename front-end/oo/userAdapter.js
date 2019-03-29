@@ -9,6 +9,11 @@ class UserAdapter {
     .then(res => res.json())
   }
 
+  getOneUser(id) {
+    return fetch(this.endPoint + `/${id}`)
+    .then(res => res.json())
+  }
+
   createUser(username) {
     return fetch(this.endPoint, {
       method: 'POST',

@@ -39,7 +39,7 @@ class Level extends Phaser.Scene {
       player.body.setGravityY(950);
 
       speed = Phaser.Math.GetSpeed(300, 1);
-      var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+      // var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
 // ADDING ENEMIES
       enemies = this.physics.add.group({

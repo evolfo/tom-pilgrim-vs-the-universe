@@ -12,18 +12,29 @@ class Game {
     return this.all.find(game => game.id === id);
   }
 
-  static generateScoreHTML(userScoresUL) {
+  static generateScoreHTML(userScoresUL, user) {
     userScoresUL.innerHTML = "";
+    let sortedGames = Game.all;
 
-    const sortedGames = Game.all.sort((a, b) => {
+    sortedGames = sortedGames.sort((a, b) => {
       return b.score - a.score
     });
-    let displayedUsers = [];
+
+    let allUserIds = [];
+    let uniqueArray = [];
+
+    sortedGames.forEach((game) => {
+      if(!allUserIds.includes(game.user_id)){
+        allUserIds.push(game.user_id);
+        uniqueArray.push(game);
+      }
+    })
+
+    let createdUser = [];
     for(let i = 0; i < 10; i++) {
-      console.log(sortedGames[i].user_id);
-      if( i < sortedGames.length && !displayedUsers.includes(sortedGames[i].user_id)){
-        userScoresUL.innerHTML += `<li id="${sortedGames[i].id}">${sortedGames[i].user.username} - ${sortedGames[i].score}</li>`
-        displayedUsers.push(sortedGames[i].user_id);
+      if( i < uniqueArray.length ){
+        userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}">${uniqueArray[i].user.username} - ${uniqueArray[i].score} (Attempts: )</li>`
+
       }
     }
   }

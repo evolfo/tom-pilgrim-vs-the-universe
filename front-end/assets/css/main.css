@@ -1,5 +1,34 @@
 
+html{
+  overflow-x: hidden;
+}
 
+body{
+/* width: 100%; */
+
+/* margin: auto; */
+  /* background-image: url("../bg-alien.gif") */
+  /* background: url(../bg-alien.gif) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover; */
+}
+
+.background {
+  width: 103vw;
+  height: 100vh;
+  position: absolute;
+  z-index: -10;
+  background-color: black;
+}
+
+.background img {
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  opacity: .2;
+}
 
 body > #main-background, body > #end-game, body > #victory {
   display: none;
@@ -25,6 +54,10 @@ body > #main-background, body > #end-game, body > #victory {
   font-family: 'helvetica';
 }
 
+#scores-div {
+  max-width: 300px;
+  margin-top: 20px;
+}
 
 button {
   padding: 20px;
@@ -41,14 +74,15 @@ button {
 } */
 
 .scoreboard {
-  text-align: right;
-  width: 100%;
+  /* text-align: right; */
+  /* width: 100%; */
+    /* background-color: white; */
 }
 
 ol {
 
   font-size: 1.5rem;
-  padding: 0px;
+  /* padding: 0px; */
     list-style-type: decimal;
 }
 
@@ -58,6 +92,8 @@ li {
 
 .scores {
   color: black;
+  background-color: white;
+
   /* position: absolute; */
   left: 884px;
 }
