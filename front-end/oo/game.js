@@ -14,17 +14,30 @@ class Game {
 
   static generateScoreHTML(userScoresUL) {
     userScoresUL.innerHTML = "";
+    let sortedGames = Game.all;
 
-    const sortedGames = Game.all.sort((a, b) => {
+    sortedGames = sortedGames.sort((a, b) => {
       return b.score - a.score
     });
-    let displayedUsers = [];
-    // debugger
-    for(let i = 0; i < 10; i++) {
-      if( i < sortedGames.length && !displayedUsers.includes(sortedGames[i].user_id)){
 
-        userScoresUL.innerHTML += `<li id="${sortedGames[i].id}">${sortedGames[i].user.username} - ${sortedGames[i].score}</li>`
-        displayedUsers.push(sortedGames[i].user_id);
+    let allUserIds = [];
+    let uniqueArray = [];
+
+    sortedGames.forEach((game) => {
+      if(!allUserIds.includes(game.user_id)){
+        allUserIds.push(game.user_id);
+        uniqueArray.push(game);
+      }
+    })
+
+
+    let createdUser = [];
+    for(let i = 0; i < 10; i++) {
+      if( i < uniqueArray.length ){
+
+        userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}">${uniqueArray[i].user.username} - ${uniqueArray[i].score}</li>`
+
+
       }
     }
   }

@@ -94,7 +94,7 @@ function gameOverScreen() {
 }
 
 playButton.addEventListener('click', event => {
-  debugger
+
   mainBackground.style.display = "none";
   userInputDIV.style.display = "none";
   health.style.display = "block";
