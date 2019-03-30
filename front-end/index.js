@@ -77,8 +77,6 @@ document.querySelector('form').addEventListener('submit', event => {
   userInputDIV.style.display = "none";
   mainBackground.style.display = "flex";
   let username = event.target.username.value;
-    debugger
-    console.log(username);
 // Creating User
   app.userAdapter.createUser(username)
     .then(userObj => {

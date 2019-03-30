@@ -12,7 +12,7 @@ class Level extends Phaser.Scene {
       this.load.image('background', "assets/json/tiles1.png");
       this.load.image('misc', "assets/json/zelda-tiles.png");
       this.load.image('walls', "assets/json/space-tiles2.png");
-      this.load.image('bullet', 'assets/bomb.png');
+      this.load.image('bullet', 'assets/fireball.png');
 
       this.load.spritesheet('evilDude', 'assets/evil-fly.png', { frameWidth: 38, frameHeight: 47 });
       // this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
