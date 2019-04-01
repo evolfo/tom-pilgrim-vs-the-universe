@@ -1,6 +1,6 @@
 class UserAdapter {
   constructor() {
-  this.endPoint = 'http://localhost:3000/api/v1/users';
+  this.endPoint = 'https://strawberry-tart-52843.herokuapp.com/api/v1/users';
   // this.updateDiv = document.querySelector('#update');
   }
 
