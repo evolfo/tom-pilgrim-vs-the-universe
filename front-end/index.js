@@ -31,6 +31,8 @@ const endGameDIV = document.querySelector('#end-game');
 const playButton2 = endGameDIV.querySelector('.play-button');
 const victoryDIV = document.querySelector('#victory');
 const playButton3 = victoryDIV.querySelector('.play-button');
+const changePlayerVictory = victoryDIV.querySelector('.change-player');
+const changePlayerDefeat = endGameDIV.querySelector('.change-player');
 
 
 const app = new App;
@@ -68,20 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
        Game.generateScoreHTML(userScoresUL);
   })
 
-  document.querySelector('form').addEventListener('submit', event => {
-    event.preventDefault();
-    userInputDIV.style.display = "none";
-    mainBackground.style.display = "flex";
-    let username = event.target.username.value;
-
-// Creating User
-    app.userAdapter.createUser(username)
-      .then(userObj => {
-        new User(userObj);
-      })
-    });
-
 })
+
+document.querySelector('form').addEventListener('submit', event => {
+  event.preventDefault();
+  userInputDIV.style.display = "none";
+  mainBackground.style.display = "flex";
+  let username = event.target.username.value;
+// Creating User
+  app.userAdapter.createUser(username)
+    .then(userObj => {
+      new User(userObj);
+    })
+  });
+
 
 function gameOverScreen() {
 
@@ -116,6 +118,9 @@ function gameVictory() {
       game.score = gameObj.score;
       Game.generateScoreHTML(userScoresUL);
     })
+
+    score = 0;
+    victory = false;
 }
 
 
@@ -128,7 +133,7 @@ playButton.addEventListener('click', event => {
   scoreDisplay.style.display = "block";
   endGameDIV.style.display = "none";
 
-  let id = User.all[0].id
+  let id = User.all[User.all.length -1].id
 
 // CREATING GAME INSTANCE JAVASCRIPT OO
   app.gameAdapter.createGame(id)
@@ -144,7 +149,7 @@ playButton2.addEventListener('click', event => {
   endGameDIV.style.display = "none";
   scoreDIV.style.display = "block";
 
-  let id = User.all[0].id
+  let id = User.all[User.all.length -1].id
 
 // CREATING GAME INSTANCE JAVASCRIPT OO
   app.gameAdapter.createGame(id)
@@ -160,7 +165,7 @@ playButton3.addEventListener('click', event => {
   victoryDIV.style.display = "none";
   scoreDIV.style.display = "block";
 
-  let id = User.all[0].id
+  let id = User.all[User.all.length -1].id
 
 // CREATING GAME INSTANCE JAVASCRIPT OO
   app.gameAdapter.createGame(id)
@@ -170,3 +175,23 @@ playButton3.addEventListener('click', event => {
 
   gameConfig();
 })
+
+changePlayerVictory.addEventListener('click', event => {
+    victoryDIV.style.display = "none";
+      mainBackground.style.display = "none";
+      userInputDIV.style.display = "flex";
+
+    app.gameAdapter.getAllGames()
+     .then(allGames => {
+       allGames.forEach(game => new Game(game))
+         Game.generateScoreHTML(userScoresUL);
+    })
+
+});
+
+changePlayerDefeat.addEventListener('click', event => {
+  endGameDIV.style.display = "none";
+  userInputDIV.style.display = "flex";
+
+
+});
