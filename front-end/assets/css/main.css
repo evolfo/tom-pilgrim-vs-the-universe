@@ -100,3 +100,10 @@ li {
 .username {
   color: #86c0ff;
 }
+
+.instructions {
+  position: absolute;
+  bottom: 150px;
+  color: white;
+  right: 50%;
+}
