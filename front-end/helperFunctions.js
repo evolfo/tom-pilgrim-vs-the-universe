@@ -100,6 +100,9 @@ function gunMechanics(bullets) {
         const self = this.scene;
         let bullet = this.scene.bullets.get();
           if((bullet && player.body.facing === 13) || (player.body.facing === 11 && left.isDown)) {
+        
+
+
           bullet.fire(player, "left");
           self.physics.add.collider(bullet, enemies, killEnemy, null, this);
           self.physics.add.collider(bullet, boss1, hitBoss, null, this);
