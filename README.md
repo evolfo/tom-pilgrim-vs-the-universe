@@ -1,5 +1,5 @@
 
-# Tom Piglrim vs. the Universe
+# Tom Pilgrim vs. the Universe
 
 #### Play it here: https://bit.ly/2XJMGCi
 
