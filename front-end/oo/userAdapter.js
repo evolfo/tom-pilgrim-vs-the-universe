@@ -1,6 +1,6 @@
 class UserAdapter {
   constructor() {
-  this.endPoint = 'https://strawberry-tart-52843.herokuapp.com/api/v1/users';
+  this.endPoint = 'https://tom-pilgrim-back-end.herokuapp.com/api/v1/users';
   // this.updateDiv = document.querySelector('#update');
   }
 

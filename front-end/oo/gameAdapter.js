@@ -1,6 +1,6 @@
 class GameAdapter {
   constructor() {
-  this.endPoint = 'https://strawberry-tart-52843.herokuapp.com/api/v1/games';
+  this.endPoint = 'https://tom-pilgrim-back-end.herokuapp.com/api/v1/games';
   // this.updateDiv = document.querySelector('#update');
   }
 
