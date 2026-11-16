@@ -2,6 +2,30 @@
 // WHEN THE PLAYER COLLIDES WITH AN ENEMY OR BOSS THIS RUNS
 // ========================================================
 
+const localRecordKey = collection => `tom-pilgrim-vs-universe.${collection}.v1`;
+
+function readLocalRecords(collection) {
+  try {
+    const records = JSON.parse(localStorage.getItem(localRecordKey(collection)) || "[]");
+    return Array.isArray(records) ? records : [];
+  } catch (_error) {
+    return [];
+  }
+}
+
+function writeLocalRecords(collection, records) {
+  try {
+    localStorage.setItem(localRecordKey(collection), JSON.stringify(records));
+  } catch (_error) {
+    // Keep the current session playable if browser storage is unavailable.
+  }
+}
+
+function createLocalId(type) {
+  const randomPart = Math.random().toString(36).slice(2, 10);
+  return `local-${type}-${Date.now().toString(36)}-${randomPart}`;
+}
+
 function hitEnemy (){
   if (isHit === false){
     // this.cameras.main.shake(100);

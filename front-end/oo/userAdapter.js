@@ -1,28 +1,17 @@
 class UserAdapter {
-  constructor() {
-  this.endPoint = 'https://tom-pilgrim-back-end.herokuapp.com/api/v1/users';
-  // this.updateDiv = document.querySelector('#update');
-  }
-
   getAllUsers() {
-    return fetch(this.endPoint)
-    .then(res => res.json())
+    return readLocalRecords('users');
   }
 
   getOneUser(id) {
-    return fetch(this.endPoint + `/${id}`)
-    .then(res => res.json())
+    return this.getAllUsers().find(user => user.id === id);
   }
 
   createUser(username) {
-    return fetch(this.endPoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({api_v1_user: {username: username}})
-    })
-    .then(resp => resp.json())
+    const user = { id: createLocalId('user'), username, local: true };
+    const users = this.getAllUsers();
+    users.push(user);
+    writeLocalRecords('users', users);
+    return user;
   }
 }

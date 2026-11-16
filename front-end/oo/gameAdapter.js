@@ -1,35 +1,33 @@
 class GameAdapter {
-  constructor() {
-  this.endPoint = 'https://tom-pilgrim-back-end.herokuapp.com/api/v1/games';
-  // this.updateDiv = document.querySelector('#update');
-  }
-
   getAllGames() {
-    return fetch(this.endPoint)
-    .then(res => res.json())
+    return readLocalRecords('games');
   }
 
   createGame(userId) {
-    return fetch(this.endPoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({api_v1_game: {user_id: userId, score: 0, victory: false}})
-    })
-    .then(resp => resp.json())
+    const user = User.findById(userId) || User.all[User.all.length - 1];
+    const game = {
+      id: createLocalId('game'),
+      user_id: user ? user.id : userId,
+      score: 0,
+      victory: false,
+      user: user ? { id: user.id, username: user.username } : { id: userId, username: 'Player' }
+    };
+    const games = this.getAllGames();
+    games.push(game);
+    writeLocalRecords('games', games);
+    return game;
   }
 
   updateGame(id, score, victory) {
-    return fetch(this.endPoint + `/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({api_v1_game: {score: score}})
-    })
-    .then(resp => resp.json())
+    const games = this.getAllGames();
+    const game = games.find(record => record.id === id);
+    if (!game) {
+      return null;
+    }
+
+    game.score = score;
+    game.victory = victory;
+    writeLocalRecords('games', games);
+    return game;
   }
 }
