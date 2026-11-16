@@ -8,14 +8,11 @@
   "observability": {
     "enabled": false
   },
-  "limits": {
-    "cpu_ms": 10
-  },
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "tom-pilgrim-scores",
-      "database_id": "REPLACE_AFTER_CREATE",
+      "database_id": "1b897eee-f104-4c34-aab6-fe528f0680b8",
       "migrations_dir": "migrations"
     }
   ]

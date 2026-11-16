@@ -6,7 +6,7 @@ The new D1 database starts empty. Scores already in a player's browser remain vi
 
 ## Free-tier cost guard
 
-This deployment is intended for the Cloudflare **Workers Free** plan only. Do not subscribe to Workers Paid or enable paid add-ons for this project. On Workers Free, Cloudflare enforces its daily request and D1 row limits; requests and writes fail at the limit instead of becoming overage charges. The Worker also has a 10 ms CPU cap, uses one D1 database, stores no logs, and uses no paid add-on bindings.
+This deployment is intended for the Cloudflare **Workers Free** plan only. Do not subscribe to Workers Paid or enable paid add-ons for this project. On Workers Free, Cloudflare enforces its daily request and D1 row limits; requests and writes fail at the limit instead of becoming overage charges. Workers Free has a 10 ms CPU limit, uses one D1 database, stores no logs, and uses no paid add-on bindings. The per-Worker CPU override supported by paid plans is intentionally omitted because Cloudflare does not accept that setting on Free.
 
 The Worker configuration cannot force an account plan or set a guaranteed account-wide $0 bill. Cloudflare's Workers spending limit is not a hard maximum and excludes the Workers Paid subscription fee and charges from other products. Check the account's plan before deploying and keep it on Workers Free. This project never upgrades the plan or creates a paid resource.
 
@@ -14,10 +14,8 @@ Cloudflare's Free plan currently includes 100,000 Worker requests per day and D1
 
 ## Deploy
 
-1. From this directory, create the database with `npx wrangler d1 create tom-pilgrim-scores`.
-2. Copy the returned database ID into `wrangler.jsonc`, replacing `REPLACE_AFTER_CREATE`.
-3. Apply the schema with `npx wrangler d1 migrations apply tom-pilgrim-scores --remote`.
-4. Deploy with `npx wrangler deploy`.
-5. Copy the printed `workers.dev` URL into `front-end/api-config.js`, then publish the updated `front-end` site.
+The production Worker is deployed at `https://tom-pilgrim-scores-api.2hwjtg646v.workers.dev`, and its D1 database and schema are already provisioned. To deploy Worker changes, run `npx wrangler deploy` from this directory. Do not create another database for this project.
 
-Do not run the create/deploy commands while the account is on a paid plan if a $0 bill is required. A D1 Free database is capped at 500 MB and the account at 10 D1 databases; do not create a second database for this project.
+The site is configured to use the deployed Worker through `front-end/api-config.js`. Publish the updated `front-end` files to the GitHub Pages branch after changing the frontend.
+
+The game uses the account's active Workers Free tier. Keep that plan active and do not enable paid add-ons for this project. A D1 Free database is capped at 500 MB and the account at 10 D1 databases; do not create a second database for this project.
