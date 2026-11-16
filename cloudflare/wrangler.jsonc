@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "tom-pilgrim-scores-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-16",
+  "workers_dev": true,
+  "preview_urls": false,
+  "observability": {
+    "enabled": false
+  },
+  "limits": {
+    "cpu_ms": 10
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "tom-pilgrim-scores",
+      "database_id": "REPLACE_AFTER_CREATE",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
