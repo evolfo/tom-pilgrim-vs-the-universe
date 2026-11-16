@@ -14,6 +14,7 @@ let gameOver = false;
 let victory = false;
 let hitEnemyIsRunning = false;
 let currentGame;
+let isGameActive = false;
 
 
 let spaceBar;
@@ -79,7 +80,7 @@ async function loadScores() {
   }
 
   const games = await app.gameAdapter.getAllGames();
-  if (sequence !== scoreLoadSequence) {
+  if (sequence !== scoreLoadSequence || isGameActive) {
     return;
   }
 
@@ -106,14 +107,18 @@ document.querySelector('form').addEventListener('submit', event => {
 
 function gameOverScreen() {
 
+  isGameActive = false;
   health.style.display = "none";
   scoreDisplay.style.display = "none";
   endGameDIV.style.display = "flex";
   playerHealth = 3;
   gameOver = false;
 
-  currentGame = Game.all[Game.all.length -1];
   victory = false;
+
+  if (!currentGame) {
+    return;
+  }
 
   const gameObj = app.gameAdapter.updateGame(currentGame.id, score, victory);
   if (gameObj) {
@@ -123,6 +128,7 @@ function gameOverScreen() {
 }
 
 function gameVictory() {
+  isGameActive = false;
   playerHealth = 3;
   gameOver = false;
   victoryDIV.style.display = "flex";
@@ -130,7 +136,10 @@ function gameVictory() {
   scoreDisplay.innerText = `Score: ${score}`;
   victory = true;
 
-  currentGame = Game.all[Game.all.length -1];
+  if (!currentGame) {
+    return;
+  }
+
   const gameObj = app.gameAdapter.updateGame(currentGame.id, score, victory);
   if (gameObj) {
     currentGame.score = gameObj.score;
@@ -159,7 +168,8 @@ function startGame() {
   endGameDIV.style.display = "none";
   victoryDIV.style.display = "none";
 
-  new Game(app.gameAdapter.createGame(user.id));
+  currentGame = new Game(app.gameAdapter.createGame(user.id));
+  isGameActive = true;
   gameConfig();
 }
 
@@ -174,6 +184,8 @@ changePlayerVictory.addEventListener('click', event => {
       mainBackground.style.display = "none";
       userInputDIV.style.display = "flex";
     User.all = [];
+    currentGame = null;
+    isGameActive = false;
     loadScores();
 
 });
@@ -182,5 +194,8 @@ changePlayerDefeat.addEventListener('click', event => {
   endGameDIV.style.display = "none";
   userInputDIV.style.display = "flex";
   User.all = [];
+  currentGame = null;
+  isGameActive = false;
+  loadScores();
 
 });
