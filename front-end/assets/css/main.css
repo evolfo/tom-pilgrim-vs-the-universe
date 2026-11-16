@@ -4,10 +4,6 @@ html{
 }
 
 body{
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 }
 
 .background {
@@ -31,7 +27,7 @@ body > #main-background, body > #end-game, body > #victory {
 
 
 #main-background, #user-input, #end-game, #victory {
-  background: url('/front-end/assets/main-background.gif');
+  background: url('../main-background.gif');
   height: 600px;
   width: 800px;
   /* position: absolute; */
@@ -52,6 +48,11 @@ body > #main-background, body > #end-game, body > #victory {
 #scores-div {
   max-width: 300px;
   margin-top: 20px;
+}
+
+.score-storage-note {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
 }
 
 button {

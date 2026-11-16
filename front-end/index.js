@@ -13,6 +13,7 @@ let angle = "left";
 let gameOver = false;
 let victory = false;
 let hitEnemyIsRunning = false;
+let currentGame;
 
 
 let spaceBar;
@@ -58,31 +59,32 @@ function gameConfig() {
   gameOver = false;
   victory = false;
   score = 0;
-  let game = new Phaser.Game(config);
+  new Phaser.Game(config);
   document.querySelector('canvas').className = "col-md-6 offset-md-1";
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadScores();
+});
 
-  app.gameAdapter.getAllGames()
-   .then(allGames => {
-     allGames.forEach(game => new Game(game))
-       Game.generateScoreHTML(userScoresUL);
-  })
-
-})
+function loadScores() {
+  Game.all = [];
+  app.gameAdapter.getAllGames().forEach(game => new Game(game));
+  Game.generateScoreHTML(userScoresUL);
+}
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault();
+  const username = event.target.username.value.trim();
+  if (!username) {
+    return;
+  }
+
+  User.all = [];
+  new User(app.userAdapter.createUser(username));
   userInputDIV.style.display = "none";
   mainBackground.style.display = "flex";
-  let username = event.target.username.value;
-// Creating User
-  app.userAdapter.createUser(username)
-    .then(userObj => {
-      new User(userObj);
-    })
-  });
+});
 
 
 function gameOverScreen() {
@@ -93,14 +95,14 @@ function gameOverScreen() {
   playerHealth = 3;
   gameOver = false;
 
-  game = Game.all[Game.all.length -1];
+  currentGame = Game.all[Game.all.length -1];
   victory = false;
 
-  app.gameAdapter.updateGame(game.id, score, victory)
-    .then(gameObj => {
-      game.score = gameObj.score;
-      Game.generateScoreHTML(userScoresUL);
-    })
+  const gameObj = app.gameAdapter.updateGame(currentGame.id, score, victory);
+  if (gameObj) {
+    currentGame.score = gameObj.score;
+    Game.generateScoreHTML(userScoresUL);
+  }
 }
 
 function gameVictory() {
@@ -111,13 +113,12 @@ function gameVictory() {
   scoreDisplay.innerText = `Score: ${score}`;
   victory = true;
 
-  game = Game.all[Game.all.length -1];
-
-  app.gameAdapter.updateGame(game.id, score, victory)
-    .then(gameObj => {
-      game.score = gameObj.score;
-      Game.generateScoreHTML(userScoresUL);
-    })
+  currentGame = Game.all[Game.all.length -1];
+  const gameObj = app.gameAdapter.updateGame(currentGame.id, score, victory);
+  if (gameObj) {
+    currentGame.score = gameObj.score;
+    Game.generateScoreHTML(userScoresUL);
+  }
 
     score = 0;
     victory = false;
@@ -126,72 +127,43 @@ function gameVictory() {
 
 // LISTENERS
 
-playButton.addEventListener('click', event => {
+function startGame() {
+  const user = User.all[User.all.length -1];
+  if (!user) {
+    mainBackground.style.display = "none";
+    userInputDIV.style.display = "flex";
+    return;
+  }
+
   mainBackground.style.display = "none";
   userInputDIV.style.display = "none";
   scoreDIV.style.display = "block";
   scoreDisplay.style.display = "block";
   endGameDIV.style.display = "none";
-
-  let id = User.all[User.all.length -1].id
-
-// CREATING GAME INSTANCE JAVASCRIPT OO
-  app.gameAdapter.createGame(id)
-    .then(gameObj => {
-      new Game(gameObj);
-    })
-
-  gameConfig();
-})
-
-playButton2.addEventListener('click', event => {
-  scoreDisplay.style.display = "block";
-  endGameDIV.style.display = "none";
-  scoreDIV.style.display = "block";
-
-  let id = User.all[User.all.length -1].id
-
-// CREATING GAME INSTANCE JAVASCRIPT OO
-  app.gameAdapter.createGame(id)
-    .then(gameObj => {
-      new Game(gameObj);
-    })
-
-  gameConfig();
-})
-
-playButton3.addEventListener('click', event => {
-  scoreDisplay.style.display = "block";
   victoryDIV.style.display = "none";
-  scoreDIV.style.display = "block";
 
-  let id = User.all[User.all.length -1].id
-
-// CREATING GAME INSTANCE JAVASCRIPT OO
-  app.gameAdapter.createGame(id)
-    .then(gameObj => {
-      new Game(gameObj);
-    })
-
+  new Game(app.gameAdapter.createGame(user.id));
   gameConfig();
-})
+}
+
+playButton.addEventListener('click', startGame);
+
+playButton2.addEventListener('click', startGame);
+
+playButton3.addEventListener('click', startGame);
 
 changePlayerVictory.addEventListener('click', event => {
     victoryDIV.style.display = "none";
       mainBackground.style.display = "none";
       userInputDIV.style.display = "flex";
-
-    app.gameAdapter.getAllGames()
-     .then(allGames => {
-       allGames.forEach(game => new Game(game))
-         Game.generateScoreHTML(userScoresUL);
-    })
+    User.all = [];
+    loadScores();
 
 });
 
 changePlayerDefeat.addEventListener('click', event => {
   endGameDIV.style.display = "none";
   userInputDIV.style.display = "flex";
-
+  User.all = [];
 
 });

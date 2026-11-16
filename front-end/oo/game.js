@@ -4,7 +4,7 @@ class Game {
     this.score = data.score;
     this.victory = data.victory;
     this.user_id = data.user_id;
-    this.user = data.user;
+    this.user = data.user || { username: 'Player' };
     Game.all.push(this);
   }
 
@@ -12,40 +12,36 @@ class Game {
     return this.all.find(game => game.id === id);
   }
 
-  static generateScoreHTML(userScoresUL, user) {
-    userScoresUL.innerHTML = "";
-    let sortedGames = Game.all;
+  static generateScoreHTML(userScoresUL) {
+    userScoresUL.replaceChildren();
+    const gamesByUser = new Map();
+    const sortedGames = [...Game.all].sort((a, b) => b.score - a.score);
 
-    sortedGames = sortedGames.sort((a, b) => {
-      return b.score - a.score
-    });
-
-    let allUserIds = [];
-    let uniqueArray = [];
-
-    sortedGames.forEach((game) => {
-      if(!allUserIds.includes(game.user_id)){
-        allUserIds.push(game.user_id);
-        game.gamesPlayed = 1;
-        uniqueArray.push(game);
+    sortedGames.forEach(game => {
+      const userId = game.user_id || game.user.id || game.id;
+      const entry = gamesByUser.get(userId);
+      if (entry) {
+        entry.gamesPlayed++;
       } else {
-        uniqueArray.forEach(uniqueGame => {
-          if (uniqueGame.user_id === game.user_id) {
-            uniqueGame.gamesPlayed++;
-          }
-        })
+        gamesByUser.set(userId, { game, gamesPlayed: 1 });
       }
     });
 
-    for(let i = 0; i < 8; i++) {
-      if( i < uniqueArray.length ){
-        userScoresUL.innerHTML += `<li id="${uniqueArray[i].user_id}"><span class="username">${uniqueArray[i].user.username}</span> - ${uniqueArray[i].score} <br> Attempts: ${uniqueArray[i].gamesPlayed} </li>`
+    const rankColors = ['#f7c25a', 'silver', '#906717'];
+    [...gamesByUser.values()].slice(0, 8).forEach(({ game, gamesPlayed }, index) => {
+      const listItem = document.createElement('li');
+      const username = document.createElement('span');
+      username.className = 'username';
+      username.textContent = game.user.username || 'Player';
+      if (rankColors[index]) {
+        username.style.color = rankColors[index];
       }
-    };
 
-    document.querySelector('.username').style.color = "#f7c25a";
-    document.querySelectorAll('.username')[1].style.color = "silver";
-    document.querySelectorAll('.username')[2].style.color = "#906717";
+      listItem.append(username, document.createTextNode(` - ${game.score} `));
+      listItem.append(document.createElement('br'));
+      listItem.append(document.createTextNode(`Attempts: ${gamesPlayed}`));
+      userScoresUL.append(listItem);
+    });
   }
 
 }
