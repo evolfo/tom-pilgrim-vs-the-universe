@@ -67,11 +67,28 @@ document.addEventListener('DOMContentLoaded', () => {
   loadScores();
 });
 
-function loadScores() {
+let scoreLoadSequence = 0;
+
+async function loadScores() {
+  const sequence = ++scoreLoadSequence;
+  const note = document.querySelector('.score-storage-note');
+  if (note) {
+    note.textContent = window.GAME_API_BASE_URL
+      ? 'Scores are shared online when available and cached in this browser.'
+      : 'Scores are saved in this browser only.';
+  }
+
+  const games = await app.gameAdapter.getAllGames();
+  if (sequence !== scoreLoadSequence) {
+    return;
+  }
+
   Game.all = [];
-  app.gameAdapter.getAllGames().forEach(game => new Game(game));
+  games.forEach(game => new Game(game));
   Game.generateScoreHTML(userScoresUL);
 }
+
+window.addEventListener('scores:updated', loadScores);
 
 document.querySelector('form').addEventListener('submit', event => {
   event.preventDefault();

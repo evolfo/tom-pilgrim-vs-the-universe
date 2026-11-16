@@ -35,11 +35,12 @@
 <script type="text/javascript" src="levels/level14.js"></script>
 <script type="text/javascript" src="levels/level15.js"></script>
 <script type="text/javascript" src="oo/user.js"></script>
+<script type="text/javascript" src="api-config.js?v=cf-worker-1"></script>
 <script type="text/javascript" src="oo/userAdapter.js?v=ca9c1ea"></script>
-<script type="text/javascript" src="oo/gameAdapter.js?v=ca9c1ea"></script>
-<script type="text/javascript" src="oo/game.js?v=ca9c1ea"></script>
+<script type="text/javascript" src="oo/gameAdapter.js?v=cloudflare-worker-1"></script>
+<script type="text/javascript" src="oo/game.js?v=cloudflare-worker-1"></script>
 <script type="text/javascript" src="oo/app.js"></script>
-<script defer type="text/javascript" src="index.js?v=ca9c1ea"></script>
+<script defer type="text/javascript" src="index.js?v=cloudflare-worker-1"></script>
 
 
   <div class="scoreboard" style="display:none">
@@ -62,7 +63,7 @@
       <h1 style="color:white">Tom Pilgrim vs the Universe</h1>
       <form action="">
         <div class="form-group">
-          <input autocomplete="off" class="form-control" name="username" required type="text" placeholder="Enter a Username">
+          <input autocomplete="off" class="form-control" maxlength="24" name="username" required type="text" placeholder="Enter a Username">
         </div>
         <button id="submit-button"  type="submit" class="btn btn-primary">Submit</button>
       </form>

@@ -4,6 +4,8 @@ class Game {
     this.score = data.score;
     this.victory = data.victory;
     this.user_id = data.user_id;
+    this.attempts = data.attempts;
+    this.shared = data.shared === true;
     this.user = data.user || { username: 'Player' };
     Game.all.push(this);
   }
@@ -18,12 +20,12 @@ class Game {
     const sortedGames = [...Game.all].sort((a, b) => b.score - a.score);
 
     sortedGames.forEach(game => {
-      const userId = game.user_id || game.user.id || game.id;
-      const entry = gamesByUser.get(userId);
+      const username = (game.user.username || 'Player').trim().toLocaleLowerCase();
+      const entry = gamesByUser.get(username);
       if (entry) {
-        entry.gamesPlayed++;
+        entry.gamesPlayed += Number(game.attempts) || 1;
       } else {
-        gamesByUser.set(userId, { game, gamesPlayed: 1 });
+        gamesByUser.set(username, { game, gamesPlayed: Number(game.attempts) || 1 });
       }
     });
 
